@@ -39,7 +39,7 @@ jobs:
       - name: Upload binary artifact
         uses: actions/upload-artifact@v4
         with:
-          name: terrafmt-${{ matrix.target_os }}-${{ matrix.target_arch }}
+          name: terrafmt-${{ steps.read_tag.outputs.tag }}-${{ matrix.target_os }}-${{ matrix.target_arch }}
           path: output/terrafmt-${{ steps.read_tag.outputs.tag }}-${{ matrix.target_os }}-${{ matrix.target_arch }}
 
   release:
@@ -59,10 +59,10 @@ jobs:
         with:
           pattern: terrafmt-${{ steps.release_tag.outputs.tag }}-*
           merge-multiple: true
-          path: dist
+          path: output
 
       - name: Show downloaded files
-        run: ls -lh dist
+        run: ls -lh output
 
       - name: Publish GitHub Release
         env:
