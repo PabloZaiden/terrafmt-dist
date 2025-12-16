@@ -73,7 +73,7 @@ jobs:
           TITLE="${RELEASE_TAG}"
           NOTES="Automated release containing darwin/linux binaries for amd64 and arm64."
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
-            gh release upload "$RELEASE_TAG" dist/* --clobber
+            gh release upload "$RELEASE_TAG" output/* --clobber
           else
-            gh release create "$RELEASE_TAG" dist/* --title "$TITLE" --notes "$NOTES"
+            gh release create "$RELEASE_TAG" output/* --title "$TITLE" --notes "$NOTES"
           fi
